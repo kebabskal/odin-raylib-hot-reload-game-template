@@ -1,3 +1,12 @@
-{ 
-    "debug.allowBreakpointsEverywhere": true,
+{
+  "debug.allowBreakpointsEverywhere": true,
+  "emeraldwalk.runonsave": {
+    "shell": "fish",
+    "commands": [
+      {
+        "match": ".odin$",
+        "cmd": "cd scripts;sh build_hot_reload.sh"
+      }
+    ]
+  }
 }
