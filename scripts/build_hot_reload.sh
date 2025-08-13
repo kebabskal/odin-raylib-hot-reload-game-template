@@ -3,8 +3,8 @@ set -eu
 
 # OUT_DIR is for everything except the exe. The exe needs to stay in root
 # folder so it sees the assets folder, without having to copy it.
-OUT_DIR=build/hot_reload
-EXE=game_hot_reload.bin
+OUT_DIR=../build/hot_reload
+EXE=../game_hot_reload.bin
 
 mkdir -p $OUT_DIR
 
@@ -34,7 +34,7 @@ esac
 # Build the game. Note that the game goes into $OUT_DIR while the exe stays in
 # the root folder.
 echo "Building game$DLL_EXT"
-odin build source -extra-linker-flags:"$EXTRA_LINKER_FLAGS" -define:RAYLIB_SHARED=true -build-mode:dll -out:$OUT_DIR/game_tmp$DLL_EXT -debug
+odin build ../source -extra-linker-flags:"$EXTRA_LINKER_FLAGS" -define:RAYLIB_SHARED=true -build-mode:dll -out:$OUT_DIR/game_tmp$DLL_EXT -debug
 
 # Need to use a temp file on Linux because it first writes an empty `game.so`,
 # which the game will load before it is actually fully written.
@@ -48,7 +48,7 @@ if pgrep -f $EXE > /dev/null; then
 fi
 
 echo "Building $EXE"
-odin build source/main_hot_reload -out:$EXE -debug
+odin build ../source/main_hot_reload -out:$EXE -debug
 
 if [ $# -ge 1 ] && [ $1 == "run" ]; then
     echo "Running $EXE"
